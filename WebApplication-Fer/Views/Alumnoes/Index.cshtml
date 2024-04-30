@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApplication_Fer.Models.Alumno>
+
+<div class=" container">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="alert alert-primary text center">
+                Lista de Alumnos
+            </h5>
+        </div>
+        <div class="col-12">
+            <div class="float-lgend">
+                <a asp-controller="Alumnoes" class="btn btn-success" asp-action="CreateA">
+                    <i class="fa-solid fa-cart-plus"></i>  Agregar
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+
+            <div class="card">
+                <div class="card-header">
+                    Administración de los Alumnos
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-border">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(p => p.Id)</th>
+                                    <th>@Html.DisplayNameFor(p => p.NombreAlumno)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Calificacion)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Semestre)</th>
+                                    <th>Eliminar</th>
+                                    <th>Editar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var elemento in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(p => elemento.Id)</td>
+                                        <td>@Html.DisplayFor(p => elemento.NombreAlumno)</td>
+                                        <td>@Html.DisplayFor(p => elemento.Calificacion)</td>
+                                        <td>@Html.DisplayFor(p => elemento.Semestre)</td>
+                                        <td>
+                                            <a asp-controller="Alumnoes" asp asp-action="Delete" asp-route-id="@elemento.Id" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i> Eliminar
+                                            </a>
+
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Alumnoes" asp asp-action="Edit" asp-route-id="@elemento.Id" class="btn btn-primary">
+                                                <i class="fa-solid fa-pen"></i>Editar
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Comprueba si hay un mensaje de éxito en TempData y muestra la notificación
+        var successMessage = "@TempData["SuccessMessage"]";
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: successMessage,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    </script>
+}

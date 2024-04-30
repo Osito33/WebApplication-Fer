@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebApplication_Fer.Models.Producto>
+@{
+    Layout = null;
+}
+
+
+
+<div class=" container">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="alert alert-primary text center">
+                Lista de Productos
+            </h5>
+        </div>
+        <div class="col-12">
+            <div class="float-lgend">
+                <a asp-controller="Home" class="btn btn-success" asp-action="Create">
+                    <i class="fa-solid fa-cart-plus"></i>  Agregar
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <img src="~/Content/imagen.jpg" alt="Encabezado" style="width: 100%; height: auto;">
+
+
+            <div class="card">
+                <div class="card-header">
+                    Administración de los productos
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-border">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(p => p.Id)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Descripcion)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Precio)</th>
+                                    <th>@Html.DisplayNameFor(p => p.Cantidad)</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var elemento in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(p => elemento.Id)</td>
+                                        <td>@Html.DisplayFor(p => elemento.Descripcion)</td>
+                                        <td>@Html.DisplayFor(p => elemento.Precio)</td>
+                                        <td>@Html.DisplayFor(p => elemento.Cantidad)</td>
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
