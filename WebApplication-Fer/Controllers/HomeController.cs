@@ -110,6 +110,37 @@ namespace WebApplication_Fer.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult SubirImagenes(int productoId, IFormFile imagenProducto)
+        {
+            var producto = _context.Productos.Find(productoId);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            if (imagenProducto != null && imagenProducto.Length > 0)
+            {
+                // Obtener el nombre del archivo
+                var fileName = producto.Descripcion + Path.GetExtension(imagenProducto.FileName);
+                var filePath = Path.Combine("wwwroot", "img", fileName);
+
+                // Guardar la imagen en el servidor
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    imagenProducto.CopyTo(stream);
+                }
+
+                // Guardar la ruta de la imagen en la base de datos
+                producto.Imagen = "/img/" + fileName;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home"); // Redirigir a alguna página de éxito
+        }
+
+
         public async Task<IActionResult> generarReporte()
         {
             return new ViewAsPdf("generarReporte", await _context.Productos.ToListAsync());

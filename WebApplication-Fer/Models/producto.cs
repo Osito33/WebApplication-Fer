@@ -11,6 +11,7 @@ namespace WebApplication_Fer.Models
         public int Precio { get; set; }
         [Required(ErrorMessage = "La cantidad es obligatoria")]
         public int Cantidad { get; set; }
+        public string? Imagen { get; set; }
 
     }
 }

@@ -1,61 +1,67 @@
 ﻿@model IEnumerable<WebApplication_Fer.Models.Producto>
 
-<div class=" container">
+<div class="container">
     <div class="row">
         <div class="col-12">
-            <h5 class="alert alert-primary text center">
+            <h5 class="alert alert-primary text-center">
                 Lista de Productos
             </h5>
         </div>
         <div class="col-12">
-            <div class="float-lgend">
+            <div class="float-lg-end">
                 <a asp-controller="Home" class="btn btn-success" asp-action="Create">
-                    <i class="fa-solid fa-cart-plus"></i>  Agregar
+                    <i class="fa-solid fa-cart-plus"></i> Agregar
                 </a>
             </div>
         </div>
-
     </div>
     <div class="row">
         <div class="col-12">
-
-
             <div class="card">
                 <div class="card-header">
                     Administración de los productos
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-border">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>@Html.DisplayNameFor(p => p.Id)</th>
                                     <th>@Html.DisplayNameFor(p => p.Descripcion)</th>
                                     <th>@Html.DisplayNameFor(p => p.Precio)</th>
                                     <th>@Html.DisplayNameFor(p => p.Cantidad)</th>
+                                    <th>Imagen</th>
                                     <th>Eliminar</th>
                                     <th>Editar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var elemento in Model)
+                                @foreach (var producto in Model)
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(p => elemento.Id)</td>
-                                        <td>@Html.DisplayFor(p => elemento.Descripcion)</td>
-                                        <td>@Html.DisplayFor(p => elemento.Precio)</td>
-                                        <td>@Html.DisplayFor(p => elemento.Cantidad)</td>
+                                        <td>@Html.DisplayFor(modelItem => producto.Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => producto.Descripcion)</td>
+                                        <td>@Html.DisplayFor(modelItem => producto.Precio)</td>
+                                        <td>@Html.DisplayFor(modelItem => producto.Cantidad)</td>
                                         <td>
-                                            <a asp-controller="Home" asp asp-action="Delete" asp-route-id="@elemento.Id" class="btn btn-danger">
-                                                <i class="fa-solid fa-trash"></i> Eliminar
-                                            </a>
-
+                                            <img src="@producto.Imagen" alt="Imagen guardada" style="max-width: 100px; max-height: 100px;">
+                                            <form method="post" enctype="multipart/form-data" asp-action="SubirImagenes">
+                                                <div class="form-group">
+                                                    <input type="file" name="imagenProducto" accept="image/*">
+                                                    <input type="hidden" name="productoId" value="@producto.Id">
+                                                    <button type="submit" class="btn btn-primary">Subir imagen</button>
+                                                </div>
+                                            </form>
                                         </td>
                                         <td>
-                                            <a asp-controller="Home" asp asp-action="Edit" asp-route-id="@elemento.Id"  class="btn btn-primary">
-                                                <i class="fa-solid fa-pen"></i>Editar
+                                            <a asp-controller="Home" asp-action="Delete" asp-route-id="@producto.Id" class="btn btn-danger">
+                                                <i class="fa-solid fa-trash"></i> Eliminar
                                             </a>
-
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Home" asp-action="Edit" asp-route-id="@producto.Id" class="btn btn-primary">
+                                                <i class="fa-solid fa-pen"></i> Editar
+                                            </a>
                                         </td>
                                     </tr>
                                 }
@@ -65,16 +71,15 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-</div>
-
-<div class="col-12">
-    <div class="float-lgend">
-        <a asp-controller="Home" class="btn btn-success" asp-action="generarReporte">
-            <i class="fas fa-file-pdf"></i>  PDF
-        </a>
+    <div class="row">
+        <div class="col-12">
+            <div class="float-lg-end">
+                <a asp-controller="Home" class="btn btn-success" asp-action="generarReporte">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -92,5 +97,19 @@
                 timer: 2000
             });
         }
+
+        function mostrarImagen(input, idPreview) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#' + idPreview).attr('src', e.target.result);
+                    $('#' + idPreview).show();
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
     </script>
 }
