@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table id="productoss" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>@Html.DisplayNameFor(p => p.Id)</th>
@@ -111,5 +111,11 @@
             }
         }
 
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#productoss').DataTable(); // Inicializa la tabla con DataTables
+        });
     </script>
 }
