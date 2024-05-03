@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using WebApplication_Fer.Data;
 using WebApplication_Fer.Models;
 
@@ -150,6 +151,39 @@ namespace WebApplication_Fer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> generarReporteAlumno()
+        {
+            return new ViewAsPdf("generarReporteAlumno", await _context.Alumno.ToListAsync());
+        }
+
+        public IActionResult SubirImagenesAlumnos(int alumnoId, IFormFile imagenAlumno)
+        {
+            var alumno = _context.Alumno.Find(alumnoId);
+
+            if (alumno == null)
+            {
+                return NotFound();
+            }
+
+            if (imagenAlumno != null && imagenAlumno.Length > 0)
+            {
+                // Obtener el nombre del archivo
+                var fileName = alumno.NombreAlumno + Path.GetExtension(imagenAlumno.FileName);
+                var filePath = Path.Combine("wwwroot", "imgAlumnos", fileName);
+
+                // Guardar la imagen en el servidor
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    imagenAlumno.CopyTo(stream);
+                }
+
+                // Guardar la ruta de la imagen en la base de datos
+                alumno.Imagen = "/imgAlumnos/" + fileName;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Alumnoes"); // Redirigir a alguna página de éxito
+        }
         private bool AlumnoExists(int id)
         {
             return _context.Alumno.Any(e => e.Id == id);

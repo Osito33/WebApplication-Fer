@@ -1,29 +1,44 @@
 ﻿@model WebApplication_Fer.Models.Usuario
 @{
-    Layout = null;
-    ViewData["Title"] = "Inicio de sesión";
+    Layout = null; // Esto indica que esta vista no utilizará un diseño (layout) compartido
 }
-  
 
-<h1 class="text-center">@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar sesión</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/img/fondo.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-@if (ViewData["Error"] != null)
-{
-    <div class="alert alert-danger text-center" role="alert">
-        @ViewData["Error"]
+        .login-title{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">Iniciar sesión</h2>
+                <form method="post" asp-action="Login" class="text-center">
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre de usuario:</label>
+                        <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                </form>
+            </div>
+        </div>
     </div>
-}
-
-<div class="d-flex justify-content-center">
-    <form method="post" asp-action="Login" class="text-center">
-        <div class="form-group">
-            <label for="nombreUsuario">Nombre de usuario:</label>
-            <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="contraseña">Contraseña:</label>
-            <input type="password" id="contraseña" name="contraseña" class="form-control" />
-        </div>
-        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-    </form>
-</div>
+</body>
+</html>

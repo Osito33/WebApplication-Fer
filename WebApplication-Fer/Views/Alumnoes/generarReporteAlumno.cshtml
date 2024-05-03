@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication_Fer.Models.Producto>
+﻿@model IEnumerable<WebApplication_Fer.Models.Alumno>
 @{
     Layout = null;
 }
@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
+    <title>Lista de Alumno</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h5 style="font-size: 40px; font-weight: bold; text-align: center;">
-                    Lista de Productos
+                    Lista de Alumnos
                 </h5>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header text-center" style="font-size: 30px; font-weight: bold; text-align: center;">
-                        Administración de los productos
+                        Administración de los alumnos
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,10 +43,10 @@
                                 <thead>
                                     <tr>
                                         <th style="border: 1px solid black;">Id</th>
-                                        <th style="border: 1px solid black;">Descripción</th>
-                                        <th style="border: 1px solid black;">Precio</th>
-                                        <th style="border: 1px solid black;">Cantidad</th>
-                                        <th style="border: 1px solid black;">Imagen</th>
+                                        <th style="border: 1px solid black;">Nombre</th>
+                                        <th style="border: 1px solid black;">Calificación</th>
+                                        <th style="border: 1px solid black;">Semestre</th>
+                                        <th style="border: 1px solid black;">Foto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,9 +54,9 @@
                                     {
                                         <tr>
                                             <td style="border: 1px solid black;">@elemento.Id</td>
-                                            <td style="border: 1px solid black;">@elemento.Descripcion</td>
-                                            <td style="border: 1px solid black;">@elemento.Precio</td>
-                                            <td style="border: 1px solid black;">@elemento.Cantidad</td>
+                                            <td style="border: 1px solid black;">@elemento.NombreAlumno</td>
+                                            <td style="border: 1px solid black;">@elemento.Calificacion</td>
+                                            <td style="border: 1px solid black;">@elemento.Semestre</td>
                                             <td>
                                                 <img src="@elemento.Imagen" alt="Imagen guardada" style="max-width: 100px; max-height: 100px;">
                                             </td>

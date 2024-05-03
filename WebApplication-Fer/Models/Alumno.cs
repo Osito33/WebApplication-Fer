@@ -11,7 +11,8 @@ namespace WebApplication_Fer.Models
         public int Calificacion{ get; set; }
         [Required(ErrorMessage = "La calificacion es obligatoria")]
         public int Semestre { get; set; }
-        
+
+        public string? Imagen { get; set; }
 
 
     }

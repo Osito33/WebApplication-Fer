@@ -33,6 +33,7 @@
                                     <th>@Html.DisplayNameFor(p => p.NombreAlumno)</th>
                                     <th>@Html.DisplayNameFor(p => p.Calificacion)</th>
                                     <th>@Html.DisplayNameFor(p => p.Semestre)</th>
+                                    <th>Imagen</th>
                                     <th>Eliminar</th>
                                     <th>Editar</th>
                                 </tr>
@@ -45,6 +46,16 @@
                                         <td>@Html.DisplayFor(p => elemento.NombreAlumno)</td>
                                         <td>@Html.DisplayFor(p => elemento.Calificacion)</td>
                                         <td>@Html.DisplayFor(p => elemento.Semestre)</td>
+                                        <td>
+                                            <img src="@elemento.Imagen" alt="Imagen guardada" style="max-width: 100px; max-height: 100px;">
+                                            <form method="post" enctype="multipart/form-data" asp-action="SubirImagenesAlumnos">
+                                                <div class="form-group">
+                                                    <input type="file" name="imagenAlumno" accept="image/*">
+                                                    <input type="hidden" name="alumnoId" value="@elemento.Id">
+                                                    <button type="submit" class="btn btn-primary">Subir imagen</button>
+                                                </div>
+                                            </form>
+                                        </td>
                                         <td>
                                             <a asp-controller="Alumnoes" asp asp-action="Delete" asp-route-id="@elemento.Id" class="btn btn-danger">
                                                 <i class="fa-solid fa-trash"></i> Eliminar
@@ -66,6 +77,15 @@
             </div>
         </div>
 
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="float-lg-end">
+                <a asp-controller="Alumnoes" class="btn btn-success" asp-action="generarReporteAlumno">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </a>
+            </div>
+        </div>
     </div>
 
 </div>
