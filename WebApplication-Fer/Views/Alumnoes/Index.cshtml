@@ -18,15 +18,13 @@
     </div>
     <div class="row">
         <div class="col-12">
-
-
             <div class="card">
                 <div class="card-header">
                     Administración de los Alumnos
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-border">
+                        <table id="alumnoss" class="table table-border">
                             <thead>
                                 <tr>
                                     <th>@Html.DisplayNameFor(p => p.Id)</th>
@@ -80,7 +78,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="float-lg-end">
+            <div class="float-lgend">
                 <a asp-controller="Alumnoes" class="btn btn-success" asp-action="generarReporteAlumno">
                     <i class="fas fa-file-pdf"></i> PDF
                 </a>
@@ -104,5 +102,11 @@
                 timer: 2000
             });
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#alumnoss').DataTable(); // Inicializa la tabla con DataTables
+        });
     </script>
 }
