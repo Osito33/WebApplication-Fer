@@ -15,7 +15,7 @@ namespace WebApplication_Fer.Controllers
         public IActionResult Index()
         {
             var productos = _context.Productos.Select(u => u.Descripcion).ToList();
-            ViewBag.Usuarios = productos;
+            ViewBag.Producto = productos;
             return View();
         }
 
